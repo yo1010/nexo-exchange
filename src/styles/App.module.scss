@@ -1,13 +1,18 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 100vh;
-  background: linear-gradient(0deg, rgba(26,65,153,1) 0%, rgba(40,83,195,1) 35%, rgba(59,169,229,1) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    background: linear-gradient(
+        0deg,
+        rgba(26, 65, 153, 1) 0%,
+        rgba(40, 83, 195, 1) 35%,
+        rgba(59, 169, 229, 1) 100%
+    );
 
-  h1 {
-    color: white;
-  }
+    h1 {
+        color: white;
+    }
 }
