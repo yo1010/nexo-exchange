@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 .container {
     display: flex;
     flex-direction: column;
@@ -7,9 +9,9 @@
     height: 100vh;
     background: linear-gradient(
         0deg,
-        rgba(26, 65, 153, 1) 0%,
-        rgba(40, 83, 195, 1) 35%,
-        rgba(59, 169, 229, 1) 100%
+        $dark-blue 0%,
+        $blue 35%,
+        $light-blue 100%
     );
 
     h1 {

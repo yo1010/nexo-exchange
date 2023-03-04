@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useCryptoPairContext } from '../CryptoPairContextProvider'
 import axios from 'axios'
+import { handleSearchedPairData } from './helpers'
 
 const CryptoPairDataProvider = ({ children }) => {
     const [data, setData] = useState(null)
@@ -20,40 +21,12 @@ const CryptoPairDataProvider = ({ children }) => {
                 )
                 .then((res) => {
                     setData(res?.data)
-
-                    if (res?.data?.error?.length > 0) {
-                        setSearchedPairs(
-                            searchedPairs.filter(
-                                (pair) => pair?.name !== cryptoPair
-                            )
-                        )
-                    }
-
-                    if (res?.data?.result) {
-                        console.log(
-                            searchedPairs,
-                            searchedPairs.findIndex(
-                                (pair) => pair?.name === cryptoPair
-                            ),
-                            cryptoPair
-                        )
-                        if (
-                            searchedPairs.findIndex(
-                                (pair) => pair?.name === cryptoPair
-                            ) < 0
-                        ) {
-                            const highPrice = res.data.result[cryptoPair]?.h
-                            setSearchedPairs([
-                                ...searchedPairs,
-                                {
-                                    name: cryptoPair,
-                                    todayPrice: highPrice[0],
-                                    roundTheClockPrice: highPrice[1],
-                                },
-                            ])
-                            console.log(searchedPairs)
-                        }
-                    }
+                    handleSearchedPairData(
+                        res,
+                        cryptoPair,
+                        searchedPairs,
+                        setSearchedPairs
+                    )
                 })
                 .catch((err) => {
                     console.error(err)

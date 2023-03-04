@@ -7,7 +7,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import LastPageIcon from '@mui/icons-material/LastPage'
 
-const CryptoPairResultsTablePagination = ({
+const CryptoPairResultsTablePaginationActions = ({
     count,
     page,
     rowsPerPage,
@@ -38,47 +38,31 @@ const CryptoPairResultsTablePagination = ({
                 disabled={page === 0}
                 aria-label="first page"
             >
-                {theme.direction === 'rtl' ? (
-                    <LastPageIcon />
-                ) : (
-                    <FirstPageIcon />
-                )}
+                <FirstPageIcon />
             </IconButton>
             <IconButton
                 onClick={handleBackButtonClick}
                 disabled={page === 0}
                 aria-label="previous page"
             >
-                {theme.direction === 'rtl' ? (
-                    <KeyboardArrowRight />
-                ) : (
-                    <KeyboardArrowLeft />
-                )}
+                <KeyboardArrowLeft />
             </IconButton>
             <IconButton
                 onClick={handleNextButtonClick}
                 disabled={page >= Math.ceil(count / rowsPerPage) - 1}
                 aria-label="next page"
             >
-                {theme.direction === 'rtl' ? (
-                    <KeyboardArrowLeft />
-                ) : (
-                    <KeyboardArrowRight />
-                )}
+                <KeyboardArrowRight />
             </IconButton>
             <IconButton
                 onClick={handleLastPageButtonClick}
                 disabled={page >= Math.ceil(count / rowsPerPage) - 1}
                 aria-label="last page"
             >
-                {theme.direction === 'rtl' ? (
-                    <FirstPageIcon />
-                ) : (
-                    <LastPageIcon />
-                )}
+                <LastPageIcon />
             </IconButton>
         </Box>
     )
 }
 
-export default CryptoPairResultsTablePagination
+export default CryptoPairResultsTablePaginationActions

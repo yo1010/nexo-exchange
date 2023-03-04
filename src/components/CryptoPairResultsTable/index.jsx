@@ -6,23 +6,29 @@ import TableContainer from '@mui/material/TableContainer'
 import TableFooter from '@mui/material/TableFooter'
 import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
-import CryptoPairResultsTablePagination from './CryptoPairResultsTablePagination'
-import { TableHead } from '@mui/material'
+import CryptoPairResultsTablePaginationActions from './CryptoPairResultsTablePaginationActions'
 import CryptoPairResultsTableHead from './CryptoPairResultsTableHead'
+import { sortRows } from './helpers'
 
 const CrryptoPairResultsTable = ({ results }) => {
-    const [order, setOrder] = React.useState('asc')
-    const [orderBy, setOrderBy] = React.useState('name')
-    const [page, setPage] = React.useState(0)
-    const [rowsPerPage, setRowsPerPage] = React.useState(5)
+    const [order, setOrder] = useState('asc')
+    const [orderBy, setOrderBy] = useState('name')
+    const [page, setPage] = useState(0)
+    const [rowsPerPage, setRowsPerPage] = useState(5)
 
-    const handleChangePage = (event, newPage) => {
+    const handleChangePage = (e, newPage) => {
         setPage(newPage)
     }
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10))
+    const handleChangeRowsPerPage = (e) => {
+        setRowsPerPage(parseInt(e.target.value, 10))
         setPage(0)
+    }
+
+    const handleRequestSort = (e, property) => {
+        const isAsc = orderBy === property && order === 'asc'
+        setOrder(isAsc ? 'desc' : 'asc')
+        setOrderBy(property)
     }
 
     if (!results || results.length === 0) {
@@ -32,27 +38,30 @@ const CrryptoPairResultsTable = ({ results }) => {
     return (
         <TableContainer sx={{ maxWidth: '80%', margin: '0 auto' }}>
             <Table sx={{ minWidth: 500 }}>
-                <CryptoPairResultsTableHead />
+                <CryptoPairResultsTableHead
+                    order={order}
+                    orderBy={orderBy}
+                    onRequestSort={handleRequestSort}
+                />
                 <TableBody>
-                    {(rowsPerPage > 0
-                        ? results.slice(
-                              page * rowsPerPage,
-                              page * rowsPerPage + rowsPerPage
-                          )
-                        : results
-                    ).map((row) => (
-                        <TableRow key={row.name}>
-                            <TableCell component="th" scope="row">
-                                {row.name}
-                            </TableCell>
-                            <TableCell style={{ width: 160 }} align="right">
-                                {row.todayPrice}
-                            </TableCell>
-                            <TableCell style={{ width: 160 }} align="right">
-                                {row.roundTheClockPrice}
-                            </TableCell>
-                        </TableRow>
-                    ))}
+                    {sortRows(results, order, orderBy)
+                        .slice(
+                            page * rowsPerPage,
+                            page * rowsPerPage + rowsPerPage
+                        )
+                        .map((row) => (
+                            <TableRow key={row.name}>
+                                <TableCell component="th" scope="row">
+                                    {row.name}
+                                </TableCell>
+                                <TableCell style={{ width: 160 }} align="right">
+                                    {row.todayPrice}
+                                </TableCell>
+                                <TableCell style={{ width: 160 }} align="right">
+                                    {row.roundTheClockPrice}
+                                </TableCell>
+                            </TableRow>
+                        ))}
                 </TableBody>
                 <TableFooter>
                     <TableRow>
@@ -75,7 +84,9 @@ const CrryptoPairResultsTable = ({ results }) => {
                             }}
                             onPageChange={handleChangePage}
                             onRowsPerPageChange={handleChangeRowsPerPage}
-                            ActionsComponent={CryptoPairResultsTablePagination}
+                            ActionsComponent={
+                                CryptoPairResultsTablePaginationActions
+                            }
                         />
                     </TableRow>
                 </TableFooter>
