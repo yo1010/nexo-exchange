@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { Fab, TextField, Tooltip, Zoom } from '@mui/material';
 import Search from '@mui/icons-material/Search';
-import { useCryptoPairContext } from '../CryptoPairContextProvider';
 
 import styles from './styles/CryptoPairSearchField.module.scss';
 
-const CryptoPairSearchField = () => {
+const CryptoPairSearchField = ({ setCryptoPair }) => {
     const [pairs, setPairs] = useState({ pairOne: '', pairTwo: '' });
-    const [, setCryptoPair] = useCryptoPairContext();
 
     const handleChange = (e) => {
         console.log('e', e.target.id, e.target.value, pairs);

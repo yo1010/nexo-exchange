@@ -1,13 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import SearchUserInterface from './layouts/SearchUserInterface';
+import URLUserInterface from './layouts/URLUserInterface';
+import { ThemeProvider } from '@emotion/react';
+import ThemeDefault from './styles/ThemeOverride';
+
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <SearchUserInterface />,
+    },
+    {
+        path: '/:cryptoPair',
+        element: <URLUserInterface />,
+    },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <App />
+        <ThemeProvider theme={ThemeDefault}>
+            <RouterProvider router={router} />
+        </ThemeProvider>
     </React.StrictMode>
 );
 

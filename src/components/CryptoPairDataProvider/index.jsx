@@ -1,40 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { useCryptoPairContext } from '../CryptoPairContextProvider';
-import axios from 'axios';
-import { handleSearchedPairData } from './helpers';
+import { useInterval } from '../../hooks';
+import { getSearchedPairData } from './helpers';
 
-const CryptoPairDataProvider = ({ children }) => {
-    const [data, setData] = useState(null);
-    const [cryptoPair] = useCryptoPairContext();
+const CryptoPairDataProvider = ({ children, cryptoPair }) => {
     const [searchedPairs, setSearchedPairs] = useState([]);
 
+    //HANDLE CALLS TO SERVER ON CRYPTO PAIR CHANGE
     useEffect(() => {
-        console.log('CRYPTO PAIR', searchedPairs);
         if (cryptoPair) {
-            const searchedPairNames = searchedPairs.map((pair) => pair.name);
-            axios
-                .get(
-                    `https://api.kraken.com/0/public/Ticker?pair=${[
-                        ...searchedPairNames,
-                        cryptoPair,
-                    ].join(', ')}`
-                )
-                .then((res) => {
-                    setData(res?.data);
-                    handleSearchedPairData(
-                        res,
-                        cryptoPair,
-                        searchedPairs,
-                        setSearchedPairs
-                    );
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
+            getSearchedPairData(cryptoPair, searchedPairs, setSearchedPairs);
         }
     }, [cryptoPair]);
 
-    if (data?.error?.length > 0) {
+    //HANDLE POLLING OF DATA
+    useInterval(
+        () => getSearchedPairData(cryptoPair, searchedPairs, setSearchedPairs),
+        10000,
+        !!cryptoPair
+    );
+
+    /*     if (data?.error?.length > 0) {
         console.log('RETURN');
         return (
             <h1>
@@ -43,7 +28,7 @@ const CryptoPairDataProvider = ({ children }) => {
                 {data.error[0].split('EQuery:').join('')}{' '}
             </h1>
         );
-    }
+    } */
 
     return children(searchedPairs);
 };
