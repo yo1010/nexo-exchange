@@ -1,11 +1,11 @@
-import React from 'react'
-import { useTheme } from '@mui/material/styles'
-import Box from '@mui/material/Box'
-import IconButton from '@mui/material/IconButton'
-import FirstPageIcon from '@mui/icons-material/FirstPage'
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
-import LastPageIcon from '@mui/icons-material/LastPage'
+import React from 'react';
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import FirstPageIcon from '@mui/icons-material/FirstPage';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import LastPageIcon from '@mui/icons-material/LastPage';
 
 const CryptoPairResultsTablePaginationActions = ({
     count,
@@ -13,23 +13,23 @@ const CryptoPairResultsTablePaginationActions = ({
     rowsPerPage,
     onPageChange,
 }) => {
-    const theme = useTheme()
+    const theme = useTheme();
 
     const handleFirstPageButtonClick = (event) => {
-        onPageChange(event, 0)
-    }
+        onPageChange(event, 0);
+    };
 
     const handleBackButtonClick = (event) => {
-        onPageChange(event, page - 1)
-    }
+        onPageChange(event, page - 1);
+    };
 
     const handleNextButtonClick = (event) => {
-        onPageChange(event, page + 1)
-    }
+        onPageChange(event, page + 1);
+    };
 
     const handleLastPageButtonClick = (event) => {
-        onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1))
-    }
+        onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+    };
 
     return (
         <Box sx={{ flexShrink: 0, ml: 2.5 }}>
@@ -62,7 +62,7 @@ const CryptoPairResultsTablePaginationActions = ({
                 <LastPageIcon />
             </IconButton>
         </Box>
-    )
-}
+    );
+};
 
-export default CryptoPairResultsTablePaginationActions
+export default CryptoPairResultsTablePaginationActions;

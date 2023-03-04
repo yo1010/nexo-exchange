@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
     Box,
     TableCell,
@@ -7,8 +7,8 @@ import {
     TableSortLabel,
     Tooltip,
     Zoom,
-} from '@mui/material'
-import { visuallyHidden } from '@mui/utils'
+} from '@mui/material';
+import { visuallyHidden } from '@mui/utils';
 
 const HEAD_CELLS = [
     {
@@ -26,12 +26,12 @@ const HEAD_CELLS = [
         numeric: true,
         label: '24 hour Price',
     },
-]
+];
 
 const CryptoPairResultsTableHead = ({ order, orderBy, onRequestSort }) => {
     const createSortHandler = (property) => (e) => {
-        onRequestSort(e, property)
-    }
+        onRequestSort(e, property);
+    };
 
     return (
         <TableHead>
@@ -68,7 +68,7 @@ const CryptoPairResultsTableHead = ({ order, orderBy, onRequestSort }) => {
                 ))}
             </TableRow>
         </TableHead>
-    )
-}
+    );
+};
 
-export default CryptoPairResultsTableHead
+export default CryptoPairResultsTableHead;

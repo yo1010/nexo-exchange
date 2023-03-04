@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles'
+import { createTheme } from '@mui/material/styles';
 
 const ThemeDefault = createTheme({
     palette: {
@@ -17,6 +17,6 @@ const ThemeDefault = createTheme({
             default: '#fafcfe',
         },
     },
-})
+});
 
-export default ThemeDefault
+export default ThemeDefault;

@@ -1,12 +1,12 @@
-import React from 'react'
-import { ThemeProvider } from '@mui/material/styles'
-import ThemeDefault from './styles/ThemeOverride'
-import CryptoPairContextProvider from './components/CryptoPairContextProvider'
-import CryptoPairDataProvider from './components/CryptoPairDataProvider'
-import CryptoPairResultsTable from './components/CryptoPairResultsTable'
-import CryptoPairSearchField from './components/CryptoPairSearchField'
+import React from 'react';
+import { ThemeProvider } from '@mui/material/styles';
+import ThemeDefault from './styles/ThemeOverride';
+import CryptoPairContextProvider from './components/CryptoPairContextProvider';
+import CryptoPairDataProvider from './components/CryptoPairDataProvider';
+import CryptoPairResultsTable from './components/CryptoPairResultsTable';
+import CryptoPairSearchField from './components/CryptoPairSearchField';
 
-import styles from './styles/App.module.scss'
+import styles from './styles/App.module.scss';
 
 const App = () => {
     return (
@@ -22,7 +22,7 @@ const App = () => {
                 </div>
             </ThemeProvider>
         </CryptoPairContextProvider>
-    )
-}
+    );
+};
 
-export default App
+export default App;

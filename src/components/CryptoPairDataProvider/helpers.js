@@ -14,7 +14,7 @@ export const handleSearchedPairData = (
     if (res?.data?.error?.length > 0) {
         setSearchedPairs(
             searchedPairs.filter((pair) => pair?.name !== currentPair)
-        )
+        );
     }
 
     if (res?.data?.result) {
@@ -22,9 +22,9 @@ export const handleSearchedPairData = (
             searchedPairs,
             searchedPairs.findIndex((pair) => pair?.name === currentPair),
             currentPair
-        )
+        );
         if (searchedPairs.findIndex((pair) => pair?.name === currentPair) < 0) {
-            const highPrice = res.data.result[currentPair]?.h
+            const highPrice = res.data.result[currentPair]?.h;
             setSearchedPairs([
                 ...searchedPairs,
                 {
@@ -32,8 +32,8 @@ export const handleSearchedPairData = (
                     todayPrice: highPrice[0],
                     roundTheClockPrice: highPrice[1],
                 },
-            ])
-            console.log(searchedPairs)
+            ]);
+            console.log(searchedPairs);
         }
     }
-}
+};

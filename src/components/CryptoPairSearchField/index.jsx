@@ -1,35 +1,35 @@
-import React, { useState } from 'react'
-import { Fab, TextField, Tooltip, Zoom } from '@mui/material'
-import Search from '@mui/icons-material/Search'
-import { useCryptoPairContext } from '../CryptoPairContextProvider'
+import React, { useState } from 'react';
+import { Fab, TextField, Tooltip, Zoom } from '@mui/material';
+import Search from '@mui/icons-material/Search';
+import { useCryptoPairContext } from '../CryptoPairContextProvider';
 
-import styles from './styles/CryptoPairSearchField.module.scss'
+import styles from './styles/CryptoPairSearchField.module.scss';
 
 const CryptoPairSearchField = () => {
-    const [pairs, setPairs] = useState({ pairOne: '', pairTwo: '' })
-    const [, setCryptoPair] = useCryptoPairContext()
+    const [pairs, setPairs] = useState({ pairOne: '', pairTwo: '' });
+    const [, setCryptoPair] = useCryptoPairContext();
 
     const handleChange = (e) => {
-        console.log('e', e.target.id, e.target.value, pairs)
+        console.log('e', e.target.id, e.target.value, pairs);
         setPairs({
             ...pairs,
             [e.target.id]: e.target.value.toUpperCase().replace(/[^a-z]/gi, ''),
-        })
-    }
+        });
+    };
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-            setCryptoPair(`${pairs.pairOne}/${pairs.pairTwo}`)
+            setCryptoPair(`${pairs.pairOne}/${pairs.pairTwo}`);
         }
-    }
+    };
 
     const handleClick = (e) => {
-        setCryptoPair(`${pairs.pairOne}/${pairs.pairTwo}`)
-    }
+        setCryptoPair(`${pairs.pairOne}/${pairs.pairTwo}`);
+    };
 
     const tooltipText = (pair) => {
-        return `Write your ${pair} pair here and press Enter to search`
-    }
+        return `Write your ${pair} pair here and press Enter to search`;
+    };
 
     return (
         <div className={styles.container}>
@@ -102,7 +102,7 @@ const CryptoPairSearchField = () => {
                 </Tooltip>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default CryptoPairSearchField
+export default CryptoPairSearchField;

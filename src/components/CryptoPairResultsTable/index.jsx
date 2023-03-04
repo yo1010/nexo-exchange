@@ -1,38 +1,38 @@
-import React, { useState } from 'react'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableFooter from '@mui/material/TableFooter'
-import TablePagination from '@mui/material/TablePagination'
-import TableRow from '@mui/material/TableRow'
-import CryptoPairResultsTablePaginationActions from './CryptoPairResultsTablePaginationActions'
-import CryptoPairResultsTableHead from './CryptoPairResultsTableHead'
-import { sortRows } from './helpers'
+import React, { useState } from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableFooter from '@mui/material/TableFooter';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import CryptoPairResultsTablePaginationActions from './CryptoPairResultsTablePaginationActions';
+import CryptoPairResultsTableHead from './CryptoPairResultsTableHead';
+import { sortRows } from './helpers';
 
 const CrryptoPairResultsTable = ({ results }) => {
-    const [order, setOrder] = useState('asc')
-    const [orderBy, setOrderBy] = useState('name')
-    const [page, setPage] = useState(0)
-    const [rowsPerPage, setRowsPerPage] = useState(5)
+    const [order, setOrder] = useState('asc');
+    const [orderBy, setOrderBy] = useState('name');
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
 
     const handleChangePage = (e, newPage) => {
-        setPage(newPage)
-    }
+        setPage(newPage);
+    };
 
     const handleChangeRowsPerPage = (e) => {
-        setRowsPerPage(parseInt(e.target.value, 10))
-        setPage(0)
-    }
+        setRowsPerPage(parseInt(e.target.value, 10));
+        setPage(0);
+    };
 
     const handleRequestSort = (e, property) => {
-        const isAsc = orderBy === property && order === 'asc'
-        setOrder(isAsc ? 'desc' : 'asc')
-        setOrderBy(property)
-    }
+        const isAsc = orderBy === property && order === 'asc';
+        setOrder(isAsc ? 'desc' : 'asc');
+        setOrderBy(property);
+    };
 
     if (!results || results.length === 0) {
-        return null
+        return null;
     }
 
     return (
@@ -92,7 +92,7 @@ const CrryptoPairResultsTable = ({ results }) => {
                 </TableFooter>
             </Table>
         </TableContainer>
-    )
-}
+    );
+};
 
-export default CrryptoPairResultsTable
+export default CrryptoPairResultsTable;
