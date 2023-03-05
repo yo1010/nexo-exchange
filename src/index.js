@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SearchInterfacePage from './pages/SearchInterfacePage';
@@ -8,6 +7,8 @@ import URLTablePage from './pages/URLTablePage';
 import { ThemeProvider } from '@emotion/react';
 import ThemeDefault from './styles/ThemeOverride';
 import ErrorPage from './pages/ErrorPage';
+
+import './index.css';
 
 const router = createBrowserRouter([
     {

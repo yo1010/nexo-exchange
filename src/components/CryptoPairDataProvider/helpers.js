@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-//TURN DATA INTO AN OBJECT SO WE CAN SEARCH FASTER - better big o notation
-
 /**
  *
  * @param res - response from Kraken API

@@ -48,7 +48,7 @@ const CrryptoPairResultsTable = ({ results }) => {
     if (!rowsToDisplay || rowsToDisplay.length === 0) {
         return (
             <h3>
-                Enter as many Cryptocurrency pairs to display their price in a
+                Enter as many Cryptocurrency pairs to display their prices in a
                 table here...
             </h3>
         );
