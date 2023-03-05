@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import SearchInterfacePage from './pages/SearchInterfacePage';
-import URLTablePage from './pages/URLTablePage';
 import { ThemeProvider } from '@emotion/react';
 import ThemeDefault from './styles/ThemeOverride';
-import ErrorPage from './pages/ErrorPage';
+import ErrorPage from './routes/ErrorPage';
+import SearchInterfacePage from './routes/SearchInterfacePage';
+import URLTablePage from './routes/URLTablePage';
 
 import './index.css';
 
