@@ -8,8 +8,8 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import CryptoPairResultsTablePaginationActions from './CryptoPairResultsTablePaginationActions';
 import CryptoPairResultsTableHead from './CryptoPairResultsTableHead';
-import { mapResultsToRows, prepResults, sortRows } from './helpers';
 import CryptoPairResultsPriceCell from './CryptoPairResultsPriceCell';
+import { mapResultsToRows, prepResults, sortRows } from './helpers';
 
 const CrryptoPairResultsTable = ({ results }) => {
     const [order, setOrder] = useState('asc');
