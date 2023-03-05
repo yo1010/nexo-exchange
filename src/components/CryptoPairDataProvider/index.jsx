@@ -16,6 +16,7 @@ const CryptoPairDataProvider = ({ children, cryptoPair }) => {
                 setErrors
             );
         }
+        // eslint-disable-next-line
     }, [cryptoPair]);
 
     //HANDLE POLLING OF DATA
