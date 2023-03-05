@@ -8,21 +8,20 @@ const CryptoPairSearchField = ({ setCryptoPair }) => {
     const [pairs, setPairs] = useState({ pairOne: '', pairTwo: '' });
 
     const handleChange = (e) => {
-        console.log('e', e.target.id, e.target.value, pairs);
         setPairs({
             ...pairs,
             [e.target.id]: e.target.value.toUpperCase().replace(/[^a-z]/gi, ''),
         });
     };
 
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter') {
-            setCryptoPair(`${pairs.pairOne}/${pairs.pairTwo}`);
-        }
-    };
-
     const handleClick = (e) => {
         setCryptoPair(`${pairs.pairOne}/${pairs.pairTwo}`);
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleClick();
+        }
     };
 
     const tooltipText = (pair) => {

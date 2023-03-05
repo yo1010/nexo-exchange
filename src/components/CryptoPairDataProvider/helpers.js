@@ -2,21 +2,6 @@ import axios from 'axios';
 
 /**
  *
- * @param res - response from Kraken API
- * @param setSearchedPairs - state update function for updating the previous searched pairs
- * @param setError - updates errors, if there was any
- *
- * Handles the state update of previously searcehd pairs
- */
-const handleSearchedPairData = (res, setSearchedPairs, setErrors) => {
-    setErrors(res?.data?.error?.length > 0 ? res.data.error : []);
-    if (res?.data?.result) {
-        setSearchedPairs(res.data.result);
-    }
-};
-
-/**
- *
  * @param currentPair - current pair being searched
  * @param searchedPairs - other previous searched pairs
  * @param setSearchedPairs - state update function for updating the previous searched pairs
@@ -42,7 +27,10 @@ export const getSearchedPairData = (
             )}`
         )
         .then((res) => {
-            handleSearchedPairData(res, setSearchedPairs, setErrors);
+            setErrors(res?.data?.error?.length > 0 ? res.data.error : []);
+            if (res?.data?.result) {
+                setSearchedPairs(res.data.result);
+            }
         })
         .catch((err) => {
             console.error(err);

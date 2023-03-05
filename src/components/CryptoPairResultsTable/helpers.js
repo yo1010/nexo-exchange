@@ -51,11 +51,11 @@ export const sortRows = (rows, order, orderBy) => {
 };
 
 /**
- * 
+ *
  * @param results - the results for the crypto pair search from Kraken's API
  * @param prevResults - previous results for the crypto pairs preceeding the current search
  * @returns the prepped result object
- * 
+ *
  * Preps the results recevied by the API by taking the highest price for the day and assigning a default amount
  */
 export const prepResults = (results, prevResults = {}) => {
@@ -71,7 +71,7 @@ export const prepResults = (results, prevResults = {}) => {
 };
 
 /**
- * 
+ *
  * @param results - the results object for the searched crypto pairs
  * @returns an array of rows to be visualized by the table
  */

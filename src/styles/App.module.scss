@@ -10,8 +10,8 @@
     height: 100vh;
     background: linear-gradient(
         0deg,
-        $dark-blue 35%,
-        $blue 70%,
+        $dark-blue 30%,
+        $blue 65%,
         $light-blue 100%
     );
 
@@ -20,4 +20,9 @@
     h5 {
         color: white;
     }
+}
+
+.errorMessage {
+    position: absolute;
+    top: 10px;
 }
