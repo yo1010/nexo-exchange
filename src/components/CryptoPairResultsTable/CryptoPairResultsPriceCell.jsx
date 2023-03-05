@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { InputAdornment, TableCell, TextField, Tooltip, Zoom } from '@mui/material';
+import {
+    InputAdornment,
+    TableCell,
+    TextField,
+    Tooltip,
+    Zoom,
+} from '@mui/material';
 
 import styles from './styles/CryptoPairResultsPriceCell.module.scss';
 
@@ -16,20 +22,20 @@ const CryptoPairResultsPriceCell = ({ row, updateRows }) => {
         if (amount > 0) {
             updateRows({
                 ...row,
-                amount: amount
+                amount: amount,
             });
         }
     };
 
     const handleKeyDown = (e) => {
-        if (e.key === "Enter") {
-            handleUpdate()
+        if (e.key === 'Enter') {
+            handleUpdate();
         }
     };
 
     useEffect(() => {
-        setAmount(row.amount)
-    }, [row])
+        setAmount(row.amount);
+    }, [row]);
 
     return (
         <TableCell className={styles.amountRow} align="right">

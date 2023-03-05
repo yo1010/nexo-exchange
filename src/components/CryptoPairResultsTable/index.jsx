@@ -34,19 +34,24 @@ const CrryptoPairResultsTable = ({ results }) => {
     };
 
     const updateResults = (updatedRow) => {
-        let updatedResults = {...preppedResults};
-        updatedResults[updatedRow.name]["amount"] = updatedRow.amount;
-        setPreppedResults(updatedResults)
+        let updatedResults = { ...preppedResults };
+        updatedResults[updatedRow.name]['amount'] = updatedRow.amount;
+        setPreppedResults(updatedResults);
     };
 
     useEffect(() => {
         prepResults(results);
-        setPreppedResults(prepResults(results, preppedResults))
+        setPreppedResults(prepResults(results, preppedResults));
     }, [results]);
 
     const rowsToDisplay = mapResultsToRows(preppedResults);
     if (!rowsToDisplay || rowsToDisplay.length === 0) {
-        return <h3>Enter as many Cryptocurrency pairs to display their price in a table here...</h3>;
+        return (
+            <h3>
+                Enter as many Cryptocurrency pairs to display their price in a
+                table here...
+            </h3>
+        );
     }
 
     return (
@@ -68,7 +73,10 @@ const CrryptoPairResultsTable = ({ results }) => {
                                 <TableCell component="th" scope="row">
                                     {row.name}
                                 </TableCell>
-                                <CryptoPairResultsPriceCell row={row} updateRows={updateResults} />
+                                <CryptoPairResultsPriceCell
+                                    row={row}
+                                    updateRows={updateResults}
+                                />
                             </TableRow>
                         ))}
                 </TableBody>
