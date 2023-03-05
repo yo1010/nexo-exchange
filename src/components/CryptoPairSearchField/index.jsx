@@ -25,7 +25,7 @@ const CryptoPairSearchField = ({ setCryptoPair }) => {
     };
 
     const tooltipText = (pair) => {
-        return `Write your ${pair} pair here and press Enter to search`;
+        return `Write ${pair} pair here and press Enter to search`;
     };
 
     return (
