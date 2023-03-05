@@ -62,7 +62,7 @@ export const prepResults = (results, prevResults = {}) => {
     return Object.fromEntries(
         Object.entries(results).map(([key, val]) => {
             let newVal = {
-                price: val.h[0],
+                price: val.a[0],
                 amount: prevResults[key]?.amount || '1',
             };
             return [key, newVal];
