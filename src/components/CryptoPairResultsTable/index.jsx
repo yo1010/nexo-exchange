@@ -41,7 +41,7 @@ const CrryptoPairResultsTable = ({ results }) => {
 
     useEffect(() => {
         prepResults(results);
-        setPreppedResults(prepResults(results, preppedResults));
+        setPreppedResults((prevResults) => prepResults(results, prevResults));
     }, [results]);
 
     const rowsToDisplay = mapResultsToRows(preppedResults);
