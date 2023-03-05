@@ -1,0 +1,20 @@
+@import '../../../styles/variables.scss';
+
+.amountRow {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.outline {
+    border-color: white !important;
+}
+
+.disabledOutline {
+    border-color: $light-blue !important;
+}
+
+.lightBlue {
+    color: $light-blue !important;
+}

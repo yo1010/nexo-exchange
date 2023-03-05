@@ -3,19 +3,22 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import SearchUserInterface from './layouts/SearchUserInterface';
-import URLUserInterface from './layouts/URLUserInterface';
+import SearchInterfacePage from './pages/SearchInterfacePage';
+import URLTablePage from './pages/URLTablePage';
 import { ThemeProvider } from '@emotion/react';
 import ThemeDefault from './styles/ThemeOverride';
+import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <SearchUserInterface />,
+        element: <SearchInterfacePage />,
+        errorElement: <ErrorPage />,
     },
     {
         path: '/:cryptoPair',
-        element: <URLUserInterface />,
+        element: <URLTablePage />,
+        errorElement: <ErrorPage />,
     },
 ]);
 

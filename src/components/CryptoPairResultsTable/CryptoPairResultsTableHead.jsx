@@ -17,14 +17,9 @@ const HEAD_CELLS = [
         label: 'Cryptocurrency pair',
     },
     {
-        id: 'todayPrice',
+        id: 'price',
         numeric: true,
-        label: 'Today Price',
-    },
-    {
-        id: 'roundTheClockPrice',
-        numeric: true,
-        label: '24 hour Price',
+        label: 'Price',
     },
 ];
 

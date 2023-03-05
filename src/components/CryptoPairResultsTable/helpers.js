@@ -19,11 +19,13 @@ const floatingPointComperator = (a, b) => {
  */
 const getComparator = (order, orderBy) => {
     const descendingComparator = (a, b, orderBy) => {
-        if (orderBy !== 'name')
+        if (orderBy !== 'name') {
+            const totalPrice = (el) => parseFloat(el[orderBy]) * parseInt(el.amount);
             return floatingPointComperator(
-                parseFloat(a[orderBy]),
-                parseFloat(b[orderBy])
+                parseFloat(totalPrice(a)),
+                parseFloat(totalPrice(b))
             );
+        }
 
         if (b[orderBy] < a[orderBy]) return -1;
         if (b[orderBy] > a[orderBy]) return 1;
@@ -45,4 +47,24 @@ const getComparator = (order, orderBy) => {
 export const sortRows = (rows, order, orderBy) => {
     const comparator = getComparator(order, orderBy);
     return rows.sort((a, b) => comparator(a, b));
+};
+
+export const prepResults = (results, prevResults={}) => {
+    return Object.fromEntries(Object.entries(results).map(
+        ([key, val]) => {            
+            let newVal = {
+                price: val.h[0],
+                amount: prevResults[key]?.amount || "1"
+            }
+            return [key, newVal]
+    }));
+};
+
+export const mapResultsToRows = (results) => {
+    return Object.entries(results).flatMap(
+        ([key, val]) => ({
+            name: key,
+            price: val.price,
+            amount: val.amount
+        }))
 };

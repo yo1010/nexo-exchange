@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,13 +8,15 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import CryptoPairResultsTablePaginationActions from './CryptoPairResultsTablePaginationActions';
 import CryptoPairResultsTableHead from './CryptoPairResultsTableHead';
-import { sortRows } from './helpers';
+import { mapResultsToRows, prepResults, sortRows } from './helpers';
+import CryptoPairResultsPriceCell from './CryptoPairResultsPriceCell';
 
 const CrryptoPairResultsTable = ({ results }) => {
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('name');
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [preppedResults, setPreppedResults] = useState(prepResults(results));
 
     const handleChangePage = (e, newPage) => {
         setPage(newPage);
@@ -26,17 +28,29 @@ const CrryptoPairResultsTable = ({ results }) => {
     };
 
     const handleRequestSort = (e, property) => {
-        const isAsc = orderBy === property && order === 'asc';
+        const isAsc = order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
         setOrderBy(property);
     };
 
-    if (!results || results.length === 0) {
-        return null;
+    const updateResults = (updatedRow) => {
+        let updatedResults = {...preppedResults};
+        updatedResults[updatedRow.name]["amount"] = updatedRow.amount;
+        setPreppedResults(updatedResults)
+    };
+
+    useEffect(() => {
+        prepResults(results);
+        setPreppedResults(prepResults(results, preppedResults))
+    }, [results]);
+
+    const rowsToDisplay = mapResultsToRows(preppedResults);
+    if (!rowsToDisplay || rowsToDisplay.length === 0) {
+        return <h3>Enter as many Cryptocurrency pairs to display their price in a table here...</h3>;
     }
 
     return (
-        <TableContainer sx={{ maxWidth: '80%', margin: '0 auto' }}>
+        <TableContainer sx={{ maxWidth: '80%', margin: '3rem auto 1rem' }}>
             <Table sx={{ minWidth: 500 }}>
                 <CryptoPairResultsTableHead
                     order={order}
@@ -44,7 +58,7 @@ const CrryptoPairResultsTable = ({ results }) => {
                     onRequestSort={handleRequestSort}
                 />
                 <TableBody>
-                    {sortRows(results, order, orderBy)
+                    {sortRows(rowsToDisplay, order, orderBy)
                         .slice(
                             page * rowsPerPage,
                             page * rowsPerPage + rowsPerPage
@@ -54,16 +68,11 @@ const CrryptoPairResultsTable = ({ results }) => {
                                 <TableCell component="th" scope="row">
                                     {row.name}
                                 </TableCell>
-                                <TableCell style={{ width: 160 }} align="right">
-                                    {row.todayPrice}
-                                </TableCell>
-                                <TableCell style={{ width: 160 }} align="right">
-                                    {row.roundTheClockPrice}
-                                </TableCell>
+                                <CryptoPairResultsPriceCell row={row} updateRows={updateResults} />
                             </TableRow>
                         ))}
                 </TableBody>
-                {results.length > 5 && (
+                {rowsToDisplay.length > 5 && (
                     <TableFooter>
                         <TableRow>
                             <TablePagination
@@ -74,7 +83,7 @@ const CrryptoPairResultsTable = ({ results }) => {
                                     { label: 'All', value: -1 },
                                 ]}
                                 colSpan={3}
-                                count={results.length}
+                                count={rowsToDisplay.length}
                                 rowsPerPage={rowsPerPage}
                                 page={page}
                                 SelectProps={{

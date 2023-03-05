@@ -3,18 +3,21 @@
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    padding: 2rem 0;
     align-items: center;
     text-align: center;
     height: 100vh;
     background: linear-gradient(
         0deg,
-        $dark-blue 0%,
-        $blue 35%,
+        $dark-blue 35%,
+        $blue 70%,
         $light-blue 100%
     );
 
-    h1 {
+    h1,
+    h3,
+    h5 {
         color: white;
     }
 }

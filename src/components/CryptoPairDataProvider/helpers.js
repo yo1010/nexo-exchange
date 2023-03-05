@@ -1,35 +1,19 @@
 import axios from 'axios';
 
+//TURN DATA INTO AN OBJECT SO WE CAN SEARCH FASTER - better big o notation
+
 /**
  *
  * @param res - response from Kraken API
- * @param currentPair - current pair being searched
- * @param searchedPairs - other previous searched pairs
  * @param setSearchedPairs - state update function for updating the previous searched pairs
+ * @param setError - updates errors, if there was any
  *
  * Handles the state update of previously searcehd pairs
  */
-const handleSearchedPairData = (
-    res,
-    currentPair,
-    searchedPairs,
-    setSearchedPairs
-) => {
-    if (res?.data?.error?.length > 0) {
-        setSearchedPairs(
-            searchedPairs.filter((pair) => pair?.name !== currentPair)
-        );
-    }
-
+const handleSearchedPairData = (res, setSearchedPairs, setErrors) => {
+    setErrors(res?.data?.error?.length > 0 ? res.data.error : []);
     if (res?.data?.result) {
-        const updatedPairs = Object.entries(res.data.result).flatMap(
-            ([key, val]) => ({
-                name: key,
-                todayPrice: val.h[0],
-                roundTheClockPrice: val.h[1],
-            })
-        );
-        setSearchedPairs(updatedPairs);
+        setSearchedPairs(res.data.result);
     }
 };
 
@@ -38,15 +22,17 @@ const handleSearchedPairData = (
  * @param currentPair - current pair being searched
  * @param searchedPairs - other previous searched pairs
  * @param setSearchedPairs - state update function for updating the previous searched pairs
+ * @param setError - updates errors, if there was any
  *
  * Gets data from Kraken for all the searched pairs
  */
 export const getSearchedPairData = (
     currentPair,
     searchedPairs,
-    setSearchedPairs
+    setSearchedPairs,
+    setErrors
 ) => {
-    const searchedPairNames = searchedPairs.map((pair) => pair.name);
+    const searchedPairNames = Object.keys(searchedPairs);
     const pairsToFetch =
         searchedPairNames.indexOf(currentPair) < 0
             ? [...searchedPairNames, currentPair]
@@ -58,12 +44,7 @@ export const getSearchedPairData = (
             )}`
         )
         .then((res) => {
-            handleSearchedPairData(
-                res,
-                currentPair,
-                searchedPairs,
-                setSearchedPairs
-            );
+            handleSearchedPairData(res, setSearchedPairs, setErrors);
         })
         .catch((err) => {
             console.error(err);
