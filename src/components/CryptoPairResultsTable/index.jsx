@@ -15,17 +15,8 @@ const CrryptoPairResultsTable = ({ results }) => {
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('name');
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
     const [preppedResults, setPreppedResults] = useState(prepResults(results));
-
-    const handleChangePage = (e, newPage) => {
-        setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (e) => {
-        setRowsPerPage(parseInt(e.target.value, 10));
-        setPage(0);
-    };
+    const ROWS_PER_PAGE = 5;
 
     const handleRequestSort = (e, property) => {
         const isAsc = order === 'asc';
@@ -65,8 +56,8 @@ const CrryptoPairResultsTable = ({ results }) => {
                 <TableBody>
                     {sortRows(rowsToDisplay, order, orderBy)
                         .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
+                            page * ROWS_PER_PAGE,
+                            page * ROWS_PER_PAGE + ROWS_PER_PAGE
                         )
                         .map((row) => (
                             <TableRow key={row.name}>
@@ -84,24 +75,12 @@ const CrryptoPairResultsTable = ({ results }) => {
                     <TableFooter>
                         <TableRow>
                             <TablePagination
-                                rowsPerPageOptions={[
-                                    5,
-                                    10,
-                                    25,
-                                    { label: 'All', value: -1 },
-                                ]}
+                                rowsPerPageOptions={[]}
                                 colSpan={3}
                                 count={rowsToDisplay.length}
-                                rowsPerPage={rowsPerPage}
+                                rowsPerPage={ROWS_PER_PAGE}
                                 page={page}
-                                SelectProps={{
-                                    inputProps: {
-                                        'aria-label': 'rows per page',
-                                    },
-                                    native: true,
-                                }}
-                                onPageChange={handleChangePage}
-                                onRowsPerPageChange={handleChangeRowsPerPage}
+                                onPageChange={(e, newPage) => setPage(newPage)}
                                 ActionsComponent={
                                     CryptoPairResultsTablePaginationActions
                                 }

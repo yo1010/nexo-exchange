@@ -11,7 +11,6 @@ import styles from './styles/CryptoPairResultsPriceCell.module.scss';
 
 const CryptoPairResultsPriceCell = ({ row, updateRows }) => {
     const [amount, setAmount] = useState(row.amount);
-    const cryptosInPair = row.name.split('/');
 
     const handleChange = (e) => {
         const changedAmount = e.target.value.replace(/[^0-9]/g, '');
@@ -37,6 +36,7 @@ const CryptoPairResultsPriceCell = ({ row, updateRows }) => {
         setAmount(row.amount);
     }, [row]);
 
+    const cryptosInPair = row.name.split('/');
     return (
         <TableCell className={styles.amountRow} align="right">
             <Tooltip
